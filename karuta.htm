@@ -110,7 +110,7 @@ const _data = [
 ["ももしきや","古き軒端の","しのぶにも","なほあまりある","昔なりけり","順徳院"],
 ];
 var _q;
-var _hideLine;
+var _hideLines;
 function start() {
 	const type = e_form.sel.value;
 	switch (type) {
@@ -119,10 +119,25 @@ function start() {
 		case "2": 
 		case "3": 
 		case "4": 
-			_hideLine = type;
+			_hideLines = [Number(type)];
 			break;
 		case "r1":
-			_hideLine = getRandomInt(5);
+			_hideLines = [getRandomInt(5)];
+			break;
+		case "r2":
+			var arr = shuffle([0,1,2,3,4]);
+			_hideLines = [arr[0], arr[1]];
+			break;
+		case "r3":
+			var arr = shuffle([0,1,2,3,4]);
+			_hideLines = [arr[0], arr[1], arr[2]];
+			break;
+		case "r4":
+			var arr = shuffle([0,1,2,3,4]);
+			_hideLines = [arr[0], arr[1], arr[2], arr[3]];
+			break;
+		case "r5":
+			_hideLines = [0,1,2,3,4];
 			break;
 	}
 	_q = _data[getRandomInt(100)];
@@ -134,7 +149,7 @@ function answer() {
 function display(isAnswer) {
 	var html = "";
 	for (var i = 0; i < 5; i++) {
-		if (i == _hideLine) {
+		if (_hideLines.includes(i)) {
 			if (isAnswer) {
 				html += "<div class='hide'>" + _q[i] + "</div>";
 			} else {
@@ -149,6 +164,16 @@ function display(isAnswer) {
 }
 function getRandomInt(max) {
   return Math.floor(Math.random() * Math.floor(max));
+}
+function shuffle(arr) {
+	for (var i = arr.length - 1; i >= 0; i--){
+	  // 0~iのランダムな数値を取得
+	  var rand = Math.floor(Math.random() * (i + 1));
+
+	  // 配列の数値を入れ替える
+	  [arr[i], arr[rand]] = [arr[rand], arr[i]];
+	}
+	return arr;
 }
 </script>
 <style>
@@ -167,10 +192,9 @@ div.hide {
 	border-radius: 0.5em;
 	border:1px solid #000;
 	color:#fff;
-	display:inline-block;
 	font-weight:bold;
 	padding:1px 4px;
-	min-width:7em;
+	width:10em;
 }
 div.q {
 	text-align:center;
@@ -196,12 +220,10 @@ button {
 隠す行
 <select name="sel">
 	<option value="r1">ランダム</option>
-<!--
 	<option value="r2">ランダム(レベル2)</option>
 	<option value="r3">ランダム(レベル3)</option>
 	<option value="r4">ランダム(レベル4)</option>
 	<option value="r5">ランダム(レベル5[神])</option>
--->
 	<option value="0">1行目</option>
 	<option value="1">2行目</option>
 	<option value="2">3行目</option>
