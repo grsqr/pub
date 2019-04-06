@@ -110,8 +110,20 @@ const _data = [
 var _q;
 var _hideLine;
 function start() {
+	const type = e_form.sel.value;
+	switch (type) {
+		case "0": 
+		case "1": 
+		case "2": 
+		case "3": 
+		case "4": 
+			_hideLine = type;
+			break;
+		case "r1":
+			_hideLine = getRandomInt(5);
+			break;
+	}
 	_q = _data[getRandomInt(100)];
-	_hideLine = getRandomInt(5);
 	display(false);
 }
 function answer() {
@@ -173,6 +185,22 @@ div#d_author {
 </head>
 <body>
 <form name="e_form">
+隠す行
+<select name="sel">
+	<option value="r1">ランダム</option>
+<!--
+	<option value="r2">ランダム(レベル2)</option>
+	<option value="r3">ランダム(レベル3)</option>
+	<option value="r4">ランダム(レベル4)</option>
+	<option value="r5">ランダム(レベル5[神])</option>
+-->
+	<option value="0">1行目</option>
+	<option value="1">2行目</option>
+	<option value="2">3行目</option>
+	<option value="3">4行目</option>
+	<option value="4">5行目</option>
+</select>
+<br>
 <button type="button" onclick="start()">問題</button>
 &#160;
 <button type="button" onclick="answer()">答え</button><br>
