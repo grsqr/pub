@@ -3,6 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Cache-Control" content="no-cache">
 <title>百人一首</title>
 <script>
 const _data = [
@@ -181,6 +183,7 @@ div#d_author {
 	margin-top:0.5em;
 }
 button {
+	font-size:1.5em;
 	width:7em;
 	height:4em;
 	margin-right:2em;
@@ -206,12 +209,12 @@ button {
 </select>
 <br>
 <br>
-<div style="height:12em;">
+<div style="height:12em;font-family:'ヒラギノ明朝 ProN','Hiragino Mincho ProN',sans-serif;">
 	<div id="d_data"></div>
 	<div id="d_author"></div>
 </div>
-<button type="button" onclick="start()">出題</button>
-<button type="button" onclick="answer()">答え</button><br>
+<button type="button" onclick="start()">出　題</button>
+<button type="button" onclick="answer()">回　答</button><br>
 
 </form>
 </body>
