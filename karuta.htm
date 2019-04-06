@@ -181,6 +181,10 @@ div#d_author {
 	margin-top:0.5em;
 	xpadding-left:1em;
 }
+button {
+	width:6em;
+	height:4em;
+}
 </style>
 </head>
 <body>
@@ -201,11 +205,14 @@ div#d_author {
 	<option value="4">5行目</option>
 </select>
 <br>
-<button type="button" onclick="start()">問題</button>
+<br>
+<div style="height:11em;">
+	<div id="d_data"></div>
+	<div id="d_author"></div>
+</div>
+<button type="button" onclick="start()">出題</button>
 &#160;
 <button type="button" onclick="answer()">答え</button><br>
-<br>
-<div id="d_data"></div>
-<div id="d_author"></div>
+
 </form>
 </body>
