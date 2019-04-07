@@ -111,6 +111,19 @@ const _data = [
 ];
 var _q;
 var _hideLines;
+function myLoad() {
+	// キャッシュにより更新されない対策
+	// クエリパラメータvの後につけたタイムスタンプを見て、現在日時より1分以上古ければ
+	// 現在日時のタイムスタンプをつけてリロード
+	const query = location.search;
+	const v = /\?v=([0-9]+)\&?/.exec(query);
+	if ((v != null) && ((Date.now() - 1000 * 60) < v[1])) {
+		// ok
+	} else {
+		const newUrl = location.href.substring(0, location.href.length - query.length) + "?v=" + Date.now();
+		location.replace(newUrl);
+	}
+}
 function start() {
 	const type = e_form.sel.value;
 	switch (type) {
@@ -138,6 +151,12 @@ function start() {
 			break;
 		case "r5":
 			_hideLines = [0,1,2,3,4];
+			break;
+		case "up":
+			_hideLines = [0,1,2];
+			break;
+		case "down":
+			_hideLines = [3,4];
 			break;
 	}
 	_q = _data[getRandomInt(100)];
@@ -215,10 +234,10 @@ button {
 }
 </style>
 </head>
-<body>
+<body onload="myLoad()">
 <form name="e_form">
 隠す行
-<select name="sel">
+<select name="sel" onchange="start()">
 	<option value="r1">ランダム</option>
 	<option value="r2">ランダム(レベル2)</option>
 	<option value="r3">ランダム(レベル3)</option>
@@ -229,6 +248,8 @@ button {
 	<option value="2">3行目</option>
 	<option value="3">4行目</option>
 	<option value="4">5行目</option>
+	<option value="down">下の句</option>
+	<option value="up">上の句</option>
 </select>
 <br>
 <br>
